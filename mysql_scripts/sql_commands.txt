@@ -1,0 +1,1 @@
+Initialize--->mysql -u root -p
