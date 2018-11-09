@@ -4,7 +4,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   database: 'mytestdb',
   user: 'myuser',
-  password: 'mypass;',
+  password: 'mypass',
 
 });
 //Async Function
