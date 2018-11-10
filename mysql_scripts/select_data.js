@@ -6,21 +6,15 @@ const connection=mysql.createConnection({
     user:'myuser',
     password:'mypass'
 }); 
-
-const person={
-    name:process.argv[2],
-    age:parseInt(process.argv[3]),
-    city:process.argv[4]
-}
-connection.query(`INSERT INTO persons (name,age,city) VALUES ('${person.name}',${person.age},'${person.city}')`,
-                        (err,results)=>
+connection.query(`SELECT * FROM persons`,
+                        (err,rows,cols)=>
                         {
                             if(err)
                                 console.log(err)
                             else
                             {
-                                console.log(results)
-                                console.log("inserted succesfully")
+                                console.log(rows)
+                                console.log(cols)
                             }
                             connection.close()
                         }
