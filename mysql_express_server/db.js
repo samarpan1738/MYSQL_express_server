@@ -30,7 +30,7 @@ function addNewPerson(name,age,city)
     return new Promise((resolve,reject)=>
 {
     connection.query(
-        'INSERT INTO persons (name,age,city) VALUES (?,?,?)',
+        `INSERT INTO persons (name,age,city) VALUES (?,?,?)`,
         [name,age,city],
         (err,results)=>
         {
