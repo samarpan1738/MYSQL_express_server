@@ -1,14 +1,21 @@
+//Get the client
 const mysql = require('mysql2')
-//Synchronous /Task
-const connection = mysql.createConnection({
+//Synchronous Task
+let config={
   host: 'localhost',
   database: 'mytestdb',
   user: 'myuser',
   password: 'mypass',
 
-});
+}
+//creating connection to the database with our specific config
+
+const connection = mysql.createConnection(config);
+
 //Async Function
+
 connection.query(
+  
   //Backticks for multi-lining strings
   `
     CREATE TABLE IF NOT EXISTS persons(
@@ -19,6 +26,7 @@ connection.query(
     )
     `,
   //Call-back Function.Runs after query has ended.
+  //results have the data we queried for(if any)
   (err, results) => {
     if (err)
       console.error(err);

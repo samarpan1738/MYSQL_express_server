@@ -1,1 +1,2 @@
 Initialize--->mysql -u root -p
+GRANT ALL PRIVILEGES ON mytestdb.* TO 'myuser' IDENTIFIED BY 'mypass';
