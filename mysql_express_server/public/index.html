@@ -4,13 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/jquery-3.3.1.js"></script>
+    <script src="./js/script.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <h1 style="text-align: center">1st DB APP</h1>
-    <ul type="square">
-        <li><h2><a href="/pages" style="text-decoration: none">Users</a></h2></li>
-        <li><h2><a href="/add" style="text-decoration: none">Add new user</a></h2></li>
-    </ul> 
+    <h1 style="text-align: center">P - E - R - S - O - N - S</h1><br>
+    <div style="display: flex;justify-content: space-evenly;">
+    <table id="persons" border="1" cellspacing="10" cellpadding="10">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
+        </tr>
+        <tr>
+            <td>----</td>
+            <td>0000</td>
+            <td>----</td>
+        </tr>
+    </table>
+
+    
+        <div>
+                <h2>Add a Person</h2>
+        <input id="name" type="text" name="name" placeholder="Name"><br>
+        <input id="age"type="number" name="age" placeholder="Age"><br>
+        <input id="city" type="text"name="city" placeholder="City"><br>
+        <input id="submit" type="submit"><br>
+    </div>
+</div>
 </body>
 </html>

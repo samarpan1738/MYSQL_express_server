@@ -1,17 +1,17 @@
-const app=require('express').Router();
-const db = require('./db')
+const route=require('express').Router();
+const dbs = require('../db')
 
-app.get('/', (req, res) => {
-    db.getAllPersons().then((persons) => {res.render('persons', {persons})})
+route.get('/', (req, res) => {
+    dbs.getAllPersons().then((persons) => {res.render('persons', {persons})})
         .catch((err) => res.send(err))
 })
 
-app.get('/add', (req, res) => {
+route.get('/add', (req, res) => {
     res.render('persons_add')
 })
 
-app.post('/add', (req, res) => {
-    db.addNewPerson(req.body.name, req.body.age, req.body.city)
+route.post('/add', (req, res) => {
+    dbs.addNewPerson(req.body.name, req.body.age, req.body.city)
         .then((results) => {
             res.redirect('/users')//Redirecting to the "persons.hbs" page
         })
@@ -20,4 +20,5 @@ app.post('/add', (req, res) => {
         })
 
 })
-exports=module.exports={app}
+
+exports=module.exports={route}

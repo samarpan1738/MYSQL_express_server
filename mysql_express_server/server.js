@@ -1,7 +1,5 @@
 //Getting clients
 const express = require('express')
-const mysql = require('mysql2')
-const db = require('./db')//Got getAllPersons & addNewPerson functions in =>(db object)
 const app = express()
 const path=require('path');
 
@@ -14,12 +12,13 @@ app.use(express.urlencoded({
 //Easily render pages with modified data
 app.set('view engine', 'hbs')
 
-//R-E-Q-U-E-S-T-S 
+//Loads static HTML file from public folder
 app.use('/',express.static(path.join(__dirname,'public')))
 
-app.get('/pages',require('./routes/pages').route)
-
-app.get('/api',require('./routes/api').route)
+//Send to pages.js Router
+app.use('/pages',require('./routes/pages').route)
+//Send to api.js Router
+app.use('/api',require('./routes/api').route)
 
 //4 0 4 - H A N D L E R
 app.listen(4444, () => {
