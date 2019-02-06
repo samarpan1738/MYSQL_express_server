@@ -21,6 +21,6 @@ app.use('/pages',require('./routes/pages').route)
 app.use('/api',require('./routes/api').route)
 
 //4 0 4 - H A N D L E R
-app.listen(4444, () => {
-    console.log("Server started at http://localhost:4444")
+app.listen(1738, () => {
+    console.log("Server started at http://localhost:1738")
 })
