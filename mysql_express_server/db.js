@@ -20,11 +20,12 @@ connection.query(
   
   //Backticks for multi-lining strings
   `
-    CREATE TABLE IF NOT EXISTS test(
+    CREATE TABLE IF NOT EXISTS final(
         id INTEGER AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(50) NOT NULL,
         age INTEGER NOT NULL,
-        city VARCHAR(30)
+        city VARCHAR(30),
+        college VARCHAR(40)
     )
     `,
   //Call-back Function.Runs after query has ended.
@@ -43,7 +44,7 @@ connection.query(
 function getAllPersons() {
     return new Promise(
         (resolve, reject) => {
-            connection.query('SELECT * FROM test',
+            connection.query('SELECT * FROM final',
                 (err, rows, cols) => {
                     if (err)
                         reject(err)
@@ -55,10 +56,11 @@ function getAllPersons() {
 }
 //Getting info of person having specified ID
 
-function getPersonById(id) {
+function getPersonById(id) 
+{
     return new Promise(
         (resolve, reject) => {
-            connection.query(`SELECT * FROM test WHERE id IS ?`,
+            connection.query(`SELECT FROM final WHERE id=?`,
             [id],
                 (err, rows, cols) => {
                     if (err)
@@ -71,11 +73,11 @@ function getPersonById(id) {
 }
 
 //Adding new person's data to database
-function addNewPerson(name, age, city) {
+function addNewPerson(name, age, city,collegeName) {
     return new Promise((resolve, reject) => {
         connection.query(
-            `INSERT INTO test (name,age,city) VALUES (?,?,?)`,
-            [name, age, city],
+            `INSERT INTO final (name,age,city,college) VALUES (?,?,?,?)`,
+            [name, age, city,collegeName],
             (err, results) => {
                 if (err)
                     reject(err)
@@ -85,8 +87,45 @@ function addNewPerson(name, age, city) {
         )
     })
 }
+function searchByCollegeName(collegeName)
+{
+    return new Promise(
+        (resolve,reject)=>
+        {
+            connection.query('SELECT FROM final WHERE college=?'),
+            [collegeName],
+            (err,rows,cols)=>
+            {
+                if(err)
+                reject(err);
+                else
+                resolve(rows);
+            }
+        }
+    )
+}
+//DELETE BY ID
+function deletePersonById(id) 
+{
+    return new Promise(
+        (resolve, reject) => {
+            connection.query(`DELETE FROM final WHERE id=?`,
+            [id],
+                (err, rows, cols) => {
+                    if (err)
+                        reject(err)
+                    else
+                        resolve()
+                })
+        }
+    )
+}
+
 //Exporting functions
 exports = module.exports = {
     getAllPersons,
-    addNewPerson
+    addNewPerson,
+    getPersonById,
+    deletePersonById,
+    searchByCollegeName
 }

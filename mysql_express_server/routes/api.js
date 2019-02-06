@@ -1,25 +1,35 @@
 const route=require('express').Router()
 const db=require('../db')
-console.log(db)
+
 //Send all person's info as array
-console.log("in API");
 route.get('/persons/',(req,res)=>
 {
     db.getAllPersons().then((persons)=>res.send(persons)).catch((err)=>res.send({error:err}))
 })
-console.log("crossed getallpersons");
 
-//Particular Person 
+//GET Particular Person's data 
 route.get('/person/:id',(req,res)=>
 {
-    console.log(" in getPersonById")
-    db.getPersonById(2).then((person)=>res.send(person)).catch((err)=>res.send({error:err}))
+    db.getPersonById(req.params.id).then((person)=>res.send(person)).catch((err)=>res.send({error:err}))
 })
-console.log("crossed getpersonsBy ID");
+
+//Search on basis of specified string
+route.get('/searchByCollegeName/:key',(req,res)=>
+{
+    db.searchByCollegeName(req.params.key).then((person)=>res.send(person)).catch((error)=>res.send({error}))
+})
+
+
+//DELETE person by ID
+route.get('/delete/:id',(req,res)=>
+{
+    db.deletePersonById(req.params.id).then(()=>res.redirect('/api/persons/')).catch((err)=>res.send({error:err}))
+})
+
 //Adds new person.info is in res.body
 route.post('/persons',(req,res)=>
 {
-    db.addNewPerson(req.body.name,req.body.age,req.body.city).then(()=>{console.log("then");res.redirect('/api/persons/')}).catch((err)=>{console.log("catch");res.send({error:err})})
+    db.addNewPerson(req.body.name,req.body.age,req.body.city,req.body.college).then(()=>res.redirect('/api/persons/')).catch((err)=>res.send({error:err}))
 })
 
 exports=module.exports={route}
